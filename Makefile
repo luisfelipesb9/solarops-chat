@@ -21,7 +21,7 @@ certs: ## Gera CA e certificado do servidor em certs/ (idempotente)
 test: ## Roda todos os testes
 	$(PY) -m pytest -q
 
-server: ## Servidor com interface gráfica (portas 5000 claro e 5001 TLS)
+server: ## Servidor com interface gráfica (portas 5050 claro e 5051 TLS)
 	$(PY) server.py --gui
 
 server-console: ## Servidor em modo console

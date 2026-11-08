@@ -19,7 +19,7 @@ def log(text):
 
 
 class ChatBot:
-    def __init__(self, llm, host="127.0.0.1", port=5000, ssl_context=None, history_size=6, workers=4):
+    def __init__(self, llm, host="127.0.0.1", port=5050, ssl_context=None, history_size=6, workers=4):
         self.llm = llm
         self.host = host
         self.port = port
@@ -107,7 +107,7 @@ class ChatBot:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Bot LLM do SolarOps Chat")
     parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=None, help="padrão: 5000, ou 5001 com --tls")
+    parser.add_argument("--port", type=int, default=None, help="padrão: 5050, ou 5051 com --tls")
     parser.add_argument("--tls", action="store_true", help="conecta usando TLS")
     parser.add_argument("--ca", default=None, help="certificado da CA (padrão: TLS_CA do .env)")
     args = parser.parse_args(argv)
@@ -126,7 +126,7 @@ def main(argv=None) -> int:
         except (OSError, ssl.SSLError) as exc:
             print(f"Erro ao carregar o certificado da CA: {exc}", file=sys.stderr)
             return 1
-    port = args.port or (5001 if args.tls else 5000)
+    port = args.port or (5051 if args.tls else 5050)
     history_size = int(os.getenv("BOT_HISTORY_SIZE", "6"))
     bot = ChatBot(llm, args.host, port, ssl_context, history_size)
     log(f"conectando a {args.host}:{port} ({'TLS' if args.tls else 'texto claro'}), LLM={type(llm).__name__}")

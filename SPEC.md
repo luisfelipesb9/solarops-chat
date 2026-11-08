@@ -85,7 +85,7 @@ Trabalho prático de Sistemas Distribuídos II (Unimontes). Este arquivo é **a 
 ### 5.1 `server.py`
 ```
 class ChatServer:
-    def __init__(self, host="0.0.0.0", plain_port=5000, tls_port=5001,
+    def __init__(self, host="0.0.0.0", plain_port=5050, tls_port=5051,
                  ssl_context=None, bot_timeout=30.0, event_queue=None): ...
     def start(self) -> None          # abre sockets e threads, retorna imediatamente
     def stop(self) -> None           # fecha tudo, idempotente
@@ -95,7 +95,7 @@ class ChatServer:
     def pending_snapshot(self) -> list[dict]  # [{"req_id","from","age"}]
 ```
 - `event_queue` recebe tuplas `(kind: str, data: dict)`. Valores de `kind`: `join`, `leave`, `msg`, `dm`, `bot_req`, `bot_resp`, `bot_timeout`, `error`, `info`.
-- CLI: `python server.py [--host H] [--port 5000] [--tls-port 5001] [--no-tls] [--gui] [--bot-timeout 30]`.
+- CLI: `python server.py [--host H] [--port 5050] [--tls-port 5051] [--no-tls] [--gui] [--bot-timeout 30]`.
   - Sem `--gui`, roda em modo console, imprimindo os eventos.
   - O TLS usa `tls_config.server_context()`.
 - Ao receber `Ctrl+C` ou fechar a janela, encerra limpo.
@@ -112,7 +112,7 @@ A interface é atualizada **só na thread principal**, via `root.after(100, poll
 ### 5.3 `client.py`
 ```
 class ChatClient:
-    def __init__(self, name, role, host="127.0.0.1", port=5000, ssl_context=None, out=print): ...
+    def __init__(self, name, role, host="127.0.0.1", port=5050, ssl_context=None, out=print): ...
     def connect(self) -> dict        # envia HELLO, devolve WELCOME ou lança ConnectionError com o texto do ERROR
     def start_receiver(self) -> None # thread daemon que chama out(format_incoming(msg))
     def handle_input(self, line) -> dict | None   # converte texto do usuário em mensagem e envia
@@ -130,7 +130,7 @@ def format_incoming(msg) -> str
 - Linha vazia é ignorada.
 - `format_incoming` deixa visível que uma resposta do bot é privada e mostra os primeiros 8 caracteres do `req_id`.
 - Queda do servidor: imprime "Conexão com o servidor perdida." e encerra sem traceback.
-- CLI: `python client.py --name N --role R [--host 127.0.0.1] [--port P] [--tls] [--ca certs/ca.crt]`. A porta padrão é 5000, ou 5001 com `--tls`.
+- CLI: `python client.py --name N --role R [--host 127.0.0.1] [--port P] [--tls] [--ca certs/ca.crt]`. A porta padrão é 5050, ou 5051 com `--tls`.
 
 ### 5.4 `llm.py`
 ```
@@ -151,7 +151,7 @@ def build_llm_from_env() -> OpenAILLM | FakeLLM
 ### 5.5 `bot.py`
 ```
 class ChatBot:
-    def __init__(self, llm, host="127.0.0.1", port=5000, ssl_context=None, history_size=6, workers=4): ...
+    def __init__(self, llm, host="127.0.0.1", port=5050, ssl_context=None, history_size=6, workers=4): ...
     def run(self) -> None   # conecta (HELLO role=bot, from=bot) e processa até EOF
     def history_for(self, user) -> list[dict]
 ```
@@ -198,7 +198,7 @@ class ChatBot:
 - O inversor "SOLX-100" e os códigos de falha são **ilustrativos** e a base deixa isso explícito.
 
 ## 8. Testes (`.venv/bin/pytest -q`)
-- Usam portas efêmeras (`port=0`) e nunca as portas 5000 e 5001.
+- Usam portas efêmeras (`port=0`) e nunca as portas 5050 e 5051.
 - Usam `FakeLLM` e nunca rede externa.
 - Cada teste dura menos de 10 s e todos usam timeouts nos sockets.
 - O fixture `tls_certs` (em `tests/conftest.py`) gera a CA e o certificado de servidor em um diretório temporário. Ele devolve `{"ca","cert","key","dir"}`.

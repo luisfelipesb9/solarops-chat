@@ -6,7 +6,7 @@ Trabalho prático de Sistemas Distribuídos II (Unimontes). O contrato técnico 
 
 ## Arquitetura
 
-1. `server.py`: servidor TCP com uma thread de accept por porta (5000 em claro, 5001 com TLS) e uma thread por cliente.
+1. `server.py`: servidor TCP com uma thread de accept por porta (5050 em claro, 5051 com TLS) e uma thread por cliente.
 2. `server_gui.py`: interface Tkinter do servidor com participantes, mensagens, eventos e pedidos pendentes ao bot.
 3. `client.py`: cliente humano de terminal; uma thread recebe mensagens enquanto a principal lê o teclado.
 4. `bot.py`: cliente bot em processo separado, conectado por socket; cada pergunta vai para um pool de threads que chama a LLM (`llm.py`, OpenAI Responses API).
@@ -29,10 +29,10 @@ make check-llm             # confere chave, modelo, latência e timeout
 make test                  # roda a suíte de testes
 
 make server                # terminal 1: servidor com interface gráfica
-make bot                   # terminal 2: bot (TLS, porta 5001)
+make bot                   # terminal 2: bot (TLS, porta 5051)
 make client NAME=ana   ROLE=cos        TLS=1   # terminal 3
 make client NAME=bruno ROLE=tecnico    TLS=1   # terminal 4
-make client NAME=carla ROLE=engenheiro          # terminal 5 (sem TLS, porta 5000)
+make client NAME=carla ROLE=engenheiro          # terminal 5 (sem TLS, porta 5050)
 ```
 
 Rode `make help` para ver todos os comandos. Papéis válidos: `cos`, `tecnico`, `engenheiro`.
@@ -67,12 +67,12 @@ Rode `make help` para ver todos os comandos. Papéis válidos: `cos`, `tecnico`,
 
 | Enlace | Porta | Proteção |
 |---|---|---|
-| Cliente humano com `TLS=1` ↔ servidor | 5001 | TLS 1.2 ou superior (na prática TLS 1.3) |
-| Bot ↔ servidor (`make bot` usa `--tls`) | 5001 | TLS |
-| Cliente humano sem `TLS=1` ↔ servidor | 5000 | **em claro**, mantido só como referência para o Wireshark |
+| Cliente humano com `TLS=1` ↔ servidor | 5051 | TLS 1.2 ou superior (na prática TLS 1.3) |
+| Bot ↔ servidor (`make bot` usa `--tls`) | 5051 | TLS |
+| Cliente humano sem `TLS=1` ↔ servidor | 5050 | **em claro**, mantido só como referência para o Wireshark |
 | Bot ↔ OpenAI | 443 | HTTPS, feito pela biblioteca `openai` |
 
-A decifragem acontece nas pontas: no servidor, dentro da thread de cada cliente (o `ssl.SSLSocket` decifra no `recv`), e no cliente ou no bot, na thread receptora. O servidor decifra, processa a mensagem e cifra de novo para cada destinatário TLS. Uma mensagem de um cliente TLS para um cliente na porta 5000 sai em claro nesse segundo enlace: por isso a porta 5000 é só para a comparação.
+A decifragem acontece nas pontas: no servidor, dentro da thread de cada cliente (o `ssl.SSLSocket` decifra no `recv`), e no cliente ou no bot, na thread receptora. O servidor decifra, processa a mensagem e cifra de novo para cada destinatário TLS. Uma mensagem de um cliente TLS para um cliente na porta 5050 sai em claro nesse segundo enlace: por isso a porta 5050 é só para a comparação.
 
 ### Certificados e validação
 
@@ -86,8 +86,8 @@ A decifragem acontece nas pontas: no servidor, dentro da thread de cada cliente 
 
 1. Capture na interface de loopback (`lo0` no macOS).
 2. Conecte um cliente sem TLS e outro com TLS e envie a mesma mensagem conhecida, por exemplo `teste wireshark 123`.
-3. Filtro `tcp.port==5000`: em *Follow TCP Stream* aparece o JSON inteiro (`"type": "MSG"`, `"from"`, `"content": "teste wireshark 123"`).
-4. Filtro `tcp.port==5001`: aparecem o *Client Hello* (com SNI `localhost`), o *Server Hello* e depois só registros `Application Data` com bytes ilegíveis. O conteúdo fica protegido porque é cifrado com chaves de sessão negociadas no handshake (ECDHE) e autenticado (AEAD); quem só observa a rede não tem essas chaves.
+3. Filtro `tcp.port==5050`: em *Follow TCP Stream* aparece o JSON inteiro (`"type": "MSG"`, `"from"`, `"content": "teste wireshark 123"`).
+4. Filtro `tcp.port==5051`: aparecem o *Client Hello* (com SNI `localhost`), o *Server Hello* e depois só registros `Application Data` com bytes ilegíveis. O conteúdo fica protegido porque é cifrado com chaves de sessão negociadas no handshake (ECDHE) e autenticado (AEAD); quem só observa a rede não tem essas chaves.
 
 ## Protocolo (resumo)
 

@@ -1,7 +1,7 @@
 """End-to-end scenarios (SPEC section 8): real server.py, bot.py and client.py processes over TCP/TLS.
 
 Every process talks through pipes; ports are ephemeral (found by binding port 0) and the bot always
-uses the FakeLLM, so nothing here touches ports 5000/5001 or the network outside loopback.
+uses the FakeLLM, so nothing here touches ports 5050/5051 or the network outside loopback.
 """
 
 import os

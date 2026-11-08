@@ -60,7 +60,7 @@ def _close(sock) -> None:
 class ChatServer:
     HELLO_TIMEOUT = 10.0  # seconds the client has to complete TLS and send HELLO
 
-    def __init__(self, host="0.0.0.0", plain_port=5000, tls_port=5001,
+    def __init__(self, host="0.0.0.0", plain_port=5050, tls_port=5051,
                  ssl_context=None, bot_timeout=30.0, event_queue=None):
         self.host = host
         self.plain_port = plain_port
@@ -415,8 +415,8 @@ def format_event(kind, data) -> str:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Servidor do SolarOps Chat.")
     parser.add_argument("--host", default="0.0.0.0")
-    parser.add_argument("--port", type=int, default=5000, help="porta em texto claro")
-    parser.add_argument("--tls-port", type=int, default=5001, help="porta TLS")
+    parser.add_argument("--port", type=int, default=5050, help="porta em texto claro")
+    parser.add_argument("--tls-port", type=int, default=5051, help="porta TLS")
     parser.add_argument("--no-tls", action="store_true", help="não abre a porta TLS")
     parser.add_argument("--gui", action="store_true", help="abre a interface gráfica")
     parser.add_argument("--bot-timeout", type=float, default=None,

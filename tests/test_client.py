@@ -460,9 +460,9 @@ class TestTLS:
 # ---------------------------------------------------------------- CLI
 
 class TestCli:
-    def test_default_port_is_5000_plain_and_5001_with_tls(self):
-        assert parse_args(["--name", "ana", "--role", "cos"]).port == 5000
-        assert parse_args(["--name", "ana", "--role", "cos", "--tls"]).port == 5001
+    def test_default_port_is_5050_plain_and_5051_with_tls(self):
+        assert parse_args(["--name", "ana", "--role", "cos"]).port == 5050
+        assert parse_args(["--name", "ana", "--role", "cos", "--tls"]).port == 5051
 
     def test_explicit_port_wins(self):
         assert parse_args(["--name", "ana", "--role", "cos", "--tls", "--port", "6000"]).port == 6000

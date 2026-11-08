@@ -103,7 +103,7 @@ def format_incoming(msg):
 
 
 class ChatClient:
-    def __init__(self, name, role, host="127.0.0.1", port=5000, ssl_context=None, out=print):
+    def __init__(self, name, role, host="127.0.0.1", port=5050, ssl_context=None, out=print):
         self.name, self.role, self.host, self.port = name, role, host, port
         self.ssl_context = ssl_context
         self.out = out
@@ -231,14 +231,14 @@ def parse_args(argv=None):
     parser.add_argument("--name", required=True, help="seu nome no chat")
     parser.add_argument("--role", required=True, choices=sorted(HUMAN_ROLES), help="seu papel")
     parser.add_argument("--host", default="127.0.0.1")
-    parser.add_argument("--port", type=int, help="padrão: 5000 (5001 com --tls)")
+    parser.add_argument("--port", type=int, help="padrão: 5050 (5051 com --tls)")
     parser.add_argument("--tls", action="store_true", help="conecta com TLS")
     parser.add_argument("--ca", default="certs/ca.crt", help="certificado da CA (com --tls)")
     args = parser.parse_args(argv)
     if not valid_name(args.name):
         parser.error("nome inválido: use de 1 a 20 caracteres entre letras, números, _ e -")
     if args.port is None:
-        args.port = 5001 if args.tls else 5000
+        args.port = 5051 if args.tls else 5050
     return args
 
 
