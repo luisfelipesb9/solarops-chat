@@ -17,7 +17,9 @@ def _make_ca(d, prefix):
     _run(["openssl", "genrsa", "-out", f"{prefix}.key", "2048"], d)
     _run(
         ["openssl", "req", "-x509", "-new", "-key", f"{prefix}.key", "-sha256", "-days", "2",
-         "-subj", f"/CN=Test {prefix}", "-out", f"{prefix}.crt"],
+         "-subj", f"/CN=Test {prefix}", "-out", f"{prefix}.crt",
+         "-addext", "basicConstraints=critical,CA:TRUE",
+         "-addext", "keyUsage=critical,keyCertSign,cRLSign"],
         d,
     )
 
@@ -35,6 +37,8 @@ def tls_certs(tmp_path_factory):
             "keyUsage=digitalSignature,keyEncipherment\n"
             "extendedKeyUsage=serverAuth\n"
             "subjectAltName=DNS:localhost,IP:127.0.0.1\n"
+            "subjectKeyIdentifier=hash\n"
+            "authorityKeyIdentifier=keyid,issuer\n"
         )
     _run(
         ["openssl", "x509", "-req", "-in", "server.csr", "-CA", "ca.crt", "-CAkey", "ca.key",
