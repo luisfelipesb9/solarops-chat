@@ -6,7 +6,7 @@ ROLE ?=
 TLS ?=
 
 .DEFAULT_GOAL := help
-.PHONY: help setup certs test server server-console bot bot-fake client check-llm demo evidencias relatorio entrega clean
+.PHONY: help setup certs test server server-console bot bot-fake client check-llm demo evidencias relatorio voz video entrega clean
 
 help: ## Lista os comandos disponíveis
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-15s %s\n", $$1, $$2}'
@@ -50,8 +50,16 @@ relatorio: ## Gera docs/Trabalho Prático - SD2.docx e o PDF (requer node e Libr
 	cd docs && npm install --silent && node gerar_relatorio.js
 	cd docs && soffice --headless --convert-to pdf --outdir . "Trabalho Prático - SD2.docx"
 
-entrega: ## Empacota o código versionado em entrega/SolarOps_SD2_codigo.zip (sem .env e chaves)
+voz: ## Gera a narração do vídeo com o TTS da OpenAI (cache por trecho)
+	$(PY) video/gerar_voz.py
+
+video: ## Renderiza as cenas e monta video/SolarOps_Chat_SD2.mp4 (requer Pillow e ffmpeg)
+	$(PYTHON) video/renderizar.py
+
+entrega: ## Empacota código, relatório e vídeo em entrega/ (sem .env e chaves)
 	mkdir -p entrega && git archive --format=zip -o entrega/SolarOps_SD2_codigo.zip --prefix=solarops-chat/ HEAD
+	cp "docs/Trabalho Prático - SD2.pdf" entrega/
+	if [ -f video/SolarOps_Chat_SD2.mp4 ]; then cp video/SolarOps_Chat_SD2.mp4 video/SolarOps_Chat_SD2.srt entrega/; fi
 
 clean: ## Remove caches do Python e do pytest (mantém .venv e certs)
 	find . -path ./.venv -prune -o -type d -name __pycache__ -exec rm -rf {} +

@@ -1,5 +1,7 @@
 # Roteiro do vídeo: SolarOps Chat (SD2)
 
+> O vídeo narrado já foi gerado a partir deste roteiro: `video/SolarOps_Chat_SD2.mp4` (9 min, 1080p, com legenda em `video/SolarOps_Chat_SD2.srt`). O texto exato da narração está em `video/roteiro.py`; este arquivo continua útil se você quiser gravar a sua própria versão.
+
 O vídeo tem cerca de 10 minutos e cobre os cenários da seção 8 do enunciado e as explicações individuais.
 Antes de gravar:
 - feche apps que mostrem dados pessoais;
@@ -62,5 +64,5 @@ Cada integrante explica com o código aberto:
 4. **Percurso até a LLM** (`client.py` → `server.py` → `bot.py` → `llm.py`): req_id, pendente com prazo, pool de workers, Responses API e resposta só ao solicitante.
 
 ## Encerramento (0,5 min)
-- `make test`: 188 testes passando.
+- `make test`: 189 testes passando.
 - Limitações em uma frase: proteção por enlace, sem autenticação de usuário, histórico em memória.

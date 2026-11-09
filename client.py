@@ -112,6 +112,7 @@ class ChatClient:
         self.on_lost = None  # optional callback, called once if the server connection drops
         self.lost = False
         self.stopped = threading.Event()
+        self.leaving = threading.Event()  # set before LEAVE: the server closing next is expected
         self._reader = None
         self._send_lock = threading.Lock()   # one writer at a time on the socket
         self._state_lock = threading.Lock()  # makes stopping happen exactly once
@@ -180,6 +181,8 @@ class ChatClient:
             return None
         if self.stopped.is_set():
             return None
+        if msg["type"] == "LEAVE":
+            self.leaving.set()
         try:
             send_msg(self.sock, msg, self._send_lock)
         except ProtocolError:
@@ -204,7 +207,7 @@ class ChatClient:
         return first
 
     def _lost(self):
-        if self._stop():
+        if self._stop() and not self.leaving.is_set():
             self.lost = True
             self.out(LOST_TEXT)
             if self.on_lost:

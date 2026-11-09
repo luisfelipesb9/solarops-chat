@@ -8,3 +8,8 @@ certs/*.csr
 docs/node_modules/
 docs/package-lock.json
 entrega/
+video/build/frames/
+video/build/segs/
+video/build/juntado.mp4
+video/build/go_*
+video/*.mp4

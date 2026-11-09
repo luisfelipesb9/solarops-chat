@@ -245,7 +245,7 @@ add(T([
   ["Arquivo", "Testes", "Cobertura"],
   ["test_protocol.py", "14", "Validação, serialização, mensagens partidas e coladas, limite de tamanho"],
   ["test_server.py", "50", "Handshake, recusas, broadcast, DM, roteamento e privacidade do bot, tempo limite, quedas, TLS"],
-  ["test_client.py", "69", "Comandos, formatação, recepção concorrente, queda do servidor, TLS e CA errada"],
+  ["test_client.py", "70", "Comandos, formatação, recepção concorrente, queda do servidor, saída voluntária, TLS e CA errada"],
   ["test_bot.py", "37", "Correlação por req_id, histórico isolado, continuação, falhas da LLM, paralelismo"],
   ["test_tls.py", "8", "Handshake, rejeição de CA alheia, TLS 1.2 mínimo, script de certificados"],
   ["test_e2e.py", "9", "Cenários da seção 8 do enunciado com processos reais"],

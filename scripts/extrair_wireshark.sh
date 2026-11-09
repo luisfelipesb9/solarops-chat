@@ -14,7 +14,7 @@ s_claro=$(tshark -r "$PCAP" -Y 'tcp.port==5050 && frame contains "teste wireshar
 s_tls=$(tshark -r "$PCAP" -Y 'tcp.port==5051 && tls.handshake.type==1' -T fields -e tcp.stream | head -1)
 {
   echo "$ tshark -r captura_5050_5051.pcap -Y 'tcp.stream==$s_tls && tls'"
-  tshark -r "$PCAP" -Y "tcp.stream==$s_tls && tls" | head -12 | sed -E 's/^ +//' | cut -c1-150
+  tshark -r "$PCAP" -Y "tcp.stream==$s_tls && tls" | head -12 | sed -E 's/^ +//; s/(, Application Data){2,}.*$/, Application Data (x4)/'
   f=$(tshark -r "$PCAP" -Y "tcp.stream==$s_tls && tls.app_data" -T fields -e frame.number | sed -n 5p)
   echo "$ tshark -r captura_5050_5051.pcap -Y 'frame.number==$f' -T fields -e tls.app_data"
   tshark -r "$PCAP" -Y "frame.number==$f" -T fields -e tls.app_data | cut -c1-96

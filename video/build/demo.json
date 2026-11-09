@@ -1,0 +1,370 @@
+{
+ "servidor": [
+  [
+   0.0,
+   "$ python server.py --gui"
+  ],
+  [
+   0.05,
+   "Servidor SolarOps (texto claro) ouvindo em 0.0.0.0:5050"
+  ],
+  [
+   0.05,
+   "Servidor SolarOps (TLS) ouvindo em 0.0.0.0:5051"
+  ],
+  [
+   90.75,
+   "Servidor encerrado."
+  ]
+ ],
+ "_marks": [
+  [
+   19.43,
+   "gui_vazia"
+  ],
+  [
+   34.56,
+   "gui_conectados"
+  ],
+  [
+   48.49,
+   "gui_bot"
+  ],
+  [
+   64.68,
+   "gui_contexto"
+  ],
+  [
+   73.73,
+   "gui_queda"
+  ],
+  [
+   89.35,
+   "gui_timeout"
+  ]
+ ],
+ "bot": [
+  [
+   19.43,
+   "$ python bot.py --tls"
+  ],
+  [
+   19.75,
+   "[bot] conectando a 127.0.0.1:5051 (TLS), LLM=OpenAILLM"
+  ],
+  [
+   19.76,
+   "[bot] conectado ao servidor"
+  ],
+  [
+   38.09,
+   "[bot] req=245d7902 user=rui ok 2.32s"
+  ],
+  [
+   50.85,
+   "[bot] req=13dbc39e user=rui ok 2.36s"
+  ],
+  [
+   53.16,
+   "[bot] req=9647abe2 user=eva ok 1.28s"
+  ],
+  [
+   73.73,
+   "[bot] encerrado pelo usuário"
+  ],
+  [
+   76.37,
+   "$ python bot.py --tls"
+  ],
+  [
+   76.7,
+   "[bot] conectando a 127.0.0.1:5051 (TLS), LLM=OpenAILLM"
+  ],
+  [
+   76.7,
+   "[bot] conectado ao servidor"
+  ],
+  [
+   77.87,
+   "[bot] req=d564cbce user=rui erro (LLMTimeout) 0.07s"
+  ],
+  [
+   90.36,
+   "[bot] encerrado pelo usuário"
+  ]
+ ],
+ "ana": [
+  [
+   19.85,
+   "$ python client.py --name ana --role cos"
+  ],
+  [
+   19.89,
+   "* Bem-vindo, ana"
+  ],
+  [
+   19.89,
+   "Digite /ajuda para ver os comandos."
+  ],
+  [
+   19.89,
+   "Participantes online (2):"
+  ],
+  [
+   19.89,
+   "  - bot (bot) [TLS]"
+  ],
+  [
+   19.89,
+   "  - ana (cos) [texto claro]"
+  ],
+  [
+   20.52,
+   "* rui (tecnico) entrou no chat."
+  ],
+  [
+   21.12,
+   "* eva (engenheiro) entrou no chat."
+  ],
+  [
+   34.56,
+   "> INV-07 do bloco B caiu. Quem está perto?"
+  ],
+  [
+   36.17,
+   "eva (engenheiro): Rui, não religa antes de medir a isolação."
+  ],
+  [
+   36.58,
+   "rui (tecnico): Ok, chego em 10 minutos."
+  ],
+  [
+   54.22,
+   "> /w eva Libera o religamento depois da medição?"
+  ],
+  [
+   64.68,
+   "[processo encerrado com kill -9]"
+  ]
+ ],
+ "rui": [
+  [
+   20.46,
+   "$ python client.py --name rui --role tecnico --tls"
+  ],
+  [
+   20.52,
+   "* Bem-vindo, rui"
+  ],
+  [
+   20.52,
+   "Digite /ajuda para ver os comandos."
+  ],
+  [
+   20.52,
+   "Participantes online (3):"
+  ],
+  [
+   20.52,
+   "  - bot (bot) [TLS]"
+  ],
+  [
+   20.52,
+   "  - ana (cos) [texto claro]"
+  ],
+  [
+   20.52,
+   "  - rui (tecnico) [TLS]"
+  ],
+  [
+   21.12,
+   "* eva (engenheiro) entrou no chat."
+  ],
+  [
+   22.07,
+   "> /lista"
+  ],
+  [
+   22.07,
+   "Participantes online (4):"
+  ],
+  [
+   22.07,
+   "  - bot (bot) [TLS]"
+  ],
+  [
+   22.07,
+   "  - ana (cos) [texto claro]"
+  ],
+  [
+   22.07,
+   "  - rui (tecnico) [TLS]"
+  ],
+  [
+   22.07,
+   "  - eva (engenheiro) [texto claro]"
+  ],
+  [
+   34.56,
+   "ana (cos): INV-07 do bloco B caiu. Quem está perto?"
+  ],
+  [
+   35.77,
+   "> @bot o inversor SOLX-100 mostra o código 2032, o que significa?"
+  ],
+  [
+   36.17,
+   "eva (engenheiro): Rui, não religa antes de medir a isolação."
+  ],
+  [
+   36.58,
+   "> Ok, chego em 10 minutos."
+  ],
+  [
+   38.09,
+   "[privado] bot (pedido 245d7902): O código 2032 indica falha de baixa resistência de isolamento CC (falha de isolação).  "
+  ],
+  [
+   38.09,
+   "    Ação: desenergizar conforme NR-10, medir a isolação por string com megôhmetro, isolar a string defeituosa e corrigir antes de religar.  "
+  ],
+  [
+   38.09,
+   "    Caso seja necessário manobra/religamento, somente com liberação do engenheiro responsável (NR-10)."
+  ],
+  [
+   48.49,
+   "> @bot e qual EPI eu uso pra essa medição?"
+  ],
+  [
+   50.85,
+   "[privado] bot (pedido 13dbc39e): Para medição de isolação (CC), use luvas isolantes de borracha classe adequada com luvas de cobertura de couro por cima.  "
+  ],
+  [
+   50.85,
+   "    Use vestimenta antichama (risco de arco), óculos de proteção (ou protetor facial se houver risco de arco) e capacete com jugular.  "
+  ],
+  [
+   50.85,
+   "    Calçado de segurança isolante, ferramentas isoladas e detector de tensão adequado verificados antes do uso.  "
+  ],
+  [
+   50.85,
+   "    Qualquer manobra/religamento relacionado exige liberação do engenheiro responsável (NR-10)."
+  ],
+  [
+   64.68,
+   "* ana saiu do chat (conexão perdida)."
+  ],
+  [
+   73.73,
+   "* bot saiu do chat (conexão perdida)."
+  ],
+  [
+   74.87,
+   "> @bot o que significa o código 2041?"
+  ],
+  [
+   74.87,
+   "[erro] (pedido ff95c2c8) Bot indisponível no momento."
+  ],
+  [
+   76.7,
+   "* bot (bot) entrou no chat."
+  ],
+  [
+   77.8,
+   "> @bot o que significa o código 2041?"
+  ],
+  [
+   77.87,
+   "[erro] (pedido d564cbce) A consulta à LLM demorou demais. Tente novamente."
+  ],
+  [
+   78.91,
+   "eva (engenheiro): O chat continua normal durante a falha do bot."
+  ],
+  [
+   89.35,
+   "> /sair"
+  ]
+ ],
+ "eva": [
+  [
+   21.07,
+   "$ python client.py --name eva --role engenheiro"
+  ],
+  [
+   21.12,
+   "* Bem-vindo, eva"
+  ],
+  [
+   21.12,
+   "Digite /ajuda para ver os comandos."
+  ],
+  [
+   21.12,
+   "Participantes online (4):"
+  ],
+  [
+   21.12,
+   "  - bot (bot) [TLS]"
+  ],
+  [
+   21.12,
+   "  - ana (cos) [texto claro]"
+  ],
+  [
+   21.12,
+   "  - rui (tecnico) [TLS]"
+  ],
+  [
+   21.12,
+   "  - eva (engenheiro) [texto claro]"
+  ],
+  [
+   34.56,
+   "ana (cos): INV-07 do bloco B caiu. Quem está perto?"
+  ],
+  [
+   36.17,
+   "> Rui, não religa antes de medir a isolação."
+  ],
+  [
+   36.58,
+   "rui (tecnico): Ok, chego em 10 minutos."
+  ],
+  [
+   51.88,
+   "> @bot qual foi o código de falha que eu perguntei antes?"
+  ],
+  [
+   53.16,
+   "[privado] bot (pedido 9647abe2): Não consta na base de conhecimento da usina."
+  ],
+  [
+   54.22,
+   "[privado] ana (cos): Libera o religamento depois da medição?"
+  ],
+  [
+   64.68,
+   "* ana saiu do chat (conexão perdida)."
+  ],
+  [
+   73.73,
+   "* bot saiu do chat (conexão perdida)."
+  ],
+  [
+   76.7,
+   "* bot (bot) entrou no chat."
+  ],
+  [
+   78.91,
+   "> O chat continua normal durante a falha do bot."
+  ],
+  [
+   89.35,
+   "> /sair"
+  ]
+ ]
+}

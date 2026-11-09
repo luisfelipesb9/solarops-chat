@@ -120,7 +120,17 @@ Todas estão documentadas em `.env.example` (modelo, timeouts, tamanho do histó
 | `make relatorio` | Gera `docs/Trabalho Prático - SD2.docx` e o PDF a partir de `evidencias/` (requer Node.js e LibreOffice) |
 | `make entrega` | Empacota o código versionado em `entrega/SolarOps_SD2_codigo.zip`, sem `.env` e sem chaves privadas |
 
-O roteiro do vídeo está em `docs/roteiro_video.md`.
+### Vídeo de demonstração
+
+`video/SolarOps_Chat_SD2.mp4` (9 min, 1080p, narração em pt-BR e legenda `.srt`) mostra uma execução real com o bot OpenAI: 3 humanos e o bot, chat durante a consulta, resposta privada, continuação, contextos separados, desconexão, bot fora do ar, tempo limite da LLM e a comparação no Wireshark.
+
+| Etapa | Comando |
+|---|---|
+| Demo ao vivo roteirizada (grava as transcrições e pausa para os prints da GUI) | `.venv/bin/python video/gravar_demo.py` |
+| Narração (TTS da OpenAI, `gpt-4o-mini-tts`) | `make voz` |
+| Renderização e montagem (Pillow + ffmpeg) | `make video` |
+
+O texto narrado está em `video/roteiro.py`; o roteiro para gravação própria está em `docs/roteiro_video.md`.
 
 ## Testes
 

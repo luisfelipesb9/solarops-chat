@@ -414,6 +414,32 @@ class TestServerLoss:
         time.sleep(0.3)
         assert lines.empty()
 
+    def test_sair_is_not_reported_as_lost_when_server_closes_first(self, serve, make_client, lines):
+        # Race seen in the live demo: the server answers LEAVE by closing the socket, and the
+        # receiver thread hits EOF before handle_input() gets to call close().
+        srv = serve()
+        c = started(srv, make_client)
+        called = threading.Event()
+        c.on_lost = called.set
+        original_close = c.close
+
+        def slow_close():
+            assert srv.received.get(timeout=WAIT)["type"] == "LEAVE"
+            srv.drop()  # server closes first...
+            time.sleep(0.3)  # ...and the receiver sees EOF before we close
+            original_close()
+
+        c.close = slow_close
+        c.handle_input("/sair")
+        c.close = original_close
+        assert c.stopped.is_set()
+        assert not called.wait(0.3)
+        assert not c.lost
+        remaining = []
+        while not lines.empty():
+            remaining.append(lines.get())
+        assert "Conexão com o servidor perdida." not in remaining
+
     def test_voluntary_close_does_not_call_on_lost(self, serve, make_client):
         srv = serve()
         c = started(srv, make_client)
