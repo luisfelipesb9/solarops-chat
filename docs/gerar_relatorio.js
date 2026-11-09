@@ -217,16 +217,16 @@ add(gap());
 add(P("A decifragem acontece nas pontas de cada enlace: no servidor, dentro da thread do cliente, quando o SSLSocket executa recv; no cliente e no bot, na thread receptora. O servidor vê o texto claro para poder encaminhar, então a proteção é por enlace e não ponta a ponta."));
 if (exists("wireshark_claro.txt")) {
   add(H3("b) Comparação no Wireshark"));
-  add(P("A captura foi feita na interface de loopback (lo0) com o filtro tcp port 5050 or tcp port 5051, durante a execução de scripts/demo_evidencias.py. Nesse roteiro, ana_cos (texto claro, 5050) envia a mensagem conhecida teste wireshark 123 e rui_tec (TLS, 5051) envia teste wireshark 456. O arquivo da captura está em evidencias/captura_5050_5051.pcap e foi analisado com tshark, a versão de linha de comando do Wireshark."));
+  add(P("A captura foi feita na interface de loopback (lo0) com o filtro tcp port 5050 or tcp port 5051, durante a execução de scripts/demo_evidencias.py. Nesse roteiro, ana_cos (texto claro, 5050) envia a mensagem conhecida teste wireshark 123 e rui_tec (TLS, 5051) envia teste wireshark 456. O arquivo da captura está em evidencias/captura_5050_5051.pcap e foi analisado no Wireshark (Figura 2) e com o tshark, sua versão de linha de comando."));
   add(Terminal("tshark: fluxo TCP da porta 5050 (Follow TCP Stream)", read("wireshark_claro.txt")));
   add(P("Na porta 5050 a mensagem aparece inteira: tipo, remetente, conteúdo e papel podem ser lidos por qualquer pessoa com acesso à rede."));
+  if (exists("wireshark_claro.png")) add(Figure("wireshark_claro.png", "Figura 2: Wireshark, Follow TCP Stream de ana_cos na porta 5050 (texto claro)", 470));
   add(Terminal("tshark: pacotes da porta 5051", read("wireshark_tls.txt")));
   add(P("Na porta 5051 só aparecem o handshake e registros Application Data. O Client Hello é rotulado TLSv1.2 porque essa é a versão do cabeçalho de registro por compatibilidade, mas a extensão supported_versions do Server Hello escolhe 0x0304, isto é, TLS 1.3; a troca de chaves é por ECDHE. O último comando mostra o início de um registro Application Data: bytes sem nenhum trecho legível. O conteúdo fica protegido porque é cifrado com uma chave de sessão AEAD derivada no handshake, que nunca trafega na rede; sem essa chave, os bytes capturados não podem ser lidos nem alterados sem detecção."));
   if (exists("wireshark_busca.txt")) {
     add(Terminal("tshark: busca pelas mensagens conhecidas em cada porta", read("wireshark_busca.txt")));
     add(P("A mensagem enviada por rui_tec não aparece em nenhum pacote da porta 5051. Ela aparece na porta 5050 porque o servidor a reencaminha a ana_cos e eva_eng, que estão conectados sem TLS. Isso confirma que a proteção vale por enlace: para que a mensagem fique protegida de ponta a ponta na rede, todos os participantes precisam usar a porta 5051."));
   }
-  if (exists("wireshark.png")) add(Figure("wireshark.png", "Figura 2: captura no Wireshark com as portas 5050 e 5051", 600));
 }
 
 add(H2("7. Integração com a LLM"));
