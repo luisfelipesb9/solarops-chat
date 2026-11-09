@@ -1,0 +1,1 @@
+{"type": "BOT_REQ", "from": "rui_tec", "to": "bot", "content": "o que significa o código 2032?", "req_id": "e82fff10a3c94f0c9b1d2a7e5f6c8d90", "ts": "2026-11-08T11:47:12.927+00:00", "role": "tecnico"}

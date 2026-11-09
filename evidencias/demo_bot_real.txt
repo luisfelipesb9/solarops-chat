@@ -1,0 +1,22 @@
+[ 0.00s] ana_cos conectado (texto claro 5050)
+[ 0.02s] rui_tec conectado (TLS 5051)
+[ 0.02s] eva_eng conectado (texto claro 5050)
+[ 0.02s] rui_tec> @bot o inversor SOLX-100 mostra o código 2032, o que significa?
+[ 0.02s] ana_cos> teste wireshark 123 (texto claro)
+[ 0.02s] rui_tec> teste wireshark 456 (cifrado)
+[ 0.07s] eva_eng recebeu: rui_tec (tecnico): teste wireshark 456 (cifrado)
+[ 0.07s] rui_tec recebeu: ana_cos (cos): teste wireshark 123 (texto claro)
+[ 0.07s] (chat entregue enquanto o bot ainda processa)
+[ 3.24s] rui_tec recebeu: [privado] bot (pedido 0917c0b6): O código 2032 indica baixa resistência de isolamento CC (falha de isolação).  
+    Causas prováveis: cabo CC danificado, conector com umidade, módulo com falha de isolação ou string em contato com a estrutura.  
+    Deve-se desenergizar conforme NR-10, medir a isolação por string com megôhmetro e corrigir antes de religar.  
+    A liberação do engenheiro responsável é obrigatória (NR-10).
+[ 3.24s] rui_tec> @bot e qual EPI eu uso pra essa medição?
+[ 5.47s] rui_tec recebeu: [privado] bot (pedido b927ece1): Para essa medição em CC com megôhmetro, use luvas isolantes de borracha de classe adequada à tensão, com luvas de cobertura de couro por cima.  
+    Use vestimenta antichama (risco de arco elétrico) e óculos de proteção (ou protetor facial, conforme o risco).  
+    Use capacete de segurança com jugular e calçado de segurança isolante.  
+    Use ferramentas isoladas e detector de tensão adequado, verificado antes do uso.  
+    A liberação do engenheiro responsável é obrigatória (NR-10).
+[ 5.47s] eva_eng> @bot qual foi o código de falha que eu perguntei antes?
+[ 6.81s] eva_eng recebeu: [privado] bot (pedido 6c2e1b7e): Não consta na base de conhecimento da usina.
+[ 6.81s] respostas do bot sobre o 2032 vistas por ana_cos/eva_eng: 0 (esperado 0)

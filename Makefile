@@ -6,7 +6,7 @@ ROLE ?=
 TLS ?=
 
 .DEFAULT_GOAL := help
-.PHONY: help setup certs test server server-console bot bot-fake client check-llm clean
+.PHONY: help setup certs test server server-console bot bot-fake client check-llm demo evidencias relatorio entrega clean
 
 help: ## Lista os comandos disponíveis
 	@grep -E '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  make %-15s %s\n", $$1, $$2}'
@@ -39,6 +39,19 @@ client: ## Cliente: make client NAME=ana ROLE=cos [TLS=1]
 
 check-llm: ## Testa a chave, o modelo e o timeout da OpenAI
 	$(PY) check_llm.py
+
+demo: ## Roteiro automático de evidências (servidor e bot já rodando)
+	$(PY) scripts/demo_evidencias.py
+
+evidencias: ## Extrai do pcap as evidências do Wireshark (requer tshark)
+	bash scripts/extrair_wireshark.sh
+
+relatorio: ## Gera docs/Trabalho Prático - SD2.docx e o PDF (requer node e LibreOffice)
+	cd docs && npm install --silent && node gerar_relatorio.js
+	cd docs && soffice --headless --convert-to pdf --outdir . "Trabalho Prático - SD2.docx"
+
+entrega: ## Empacota o código versionado em entrega/SolarOps_SD2_codigo.zip (sem .env e chaves)
+	mkdir -p entrega && git archive --format=zip -o entrega/SolarOps_SD2_codigo.zip --prefix=solarops-chat/ HEAD
 
 clean: ## Remove caches do Python e do pytest (mantém .venv e certs)
 	find . -path ./.venv -prune -o -type d -name __pycache__ -exec rm -rf {} +

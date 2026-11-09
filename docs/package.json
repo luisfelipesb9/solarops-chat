@@ -1,0 +1,7 @@
+{
+  "name": "solarops-relatorio",
+  "private": true,
+  "description": "Gera o relatório do SolarOps Chat (DOCX) a partir das evidências",
+  "scripts": { "relatorio": "node gerar_relatorio.js" },
+  "dependencies": { "docx": "^9.5.0" }
+}

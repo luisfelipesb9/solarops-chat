@@ -1,0 +1,15 @@
+$ tshark -r captura_5050_5051.pcap -Y 'tcp.stream==4 && tls'
+21   0.012217    127.0.0.1 → 127.0.0.1    TLSv1.2 1584 Client Hello
+23   0.013937    127.0.0.1 → 127.0.0.1    TLSv1.3 2582 Server Hello, Change Cipher Spec, Application Data, Application Data, Application Data, Appli
+25   0.014169    127.0.0.1 → 127.0.0.1    TLSv1.3 136 Change Cipher Spec, Application Data
+27   0.014229    127.0.0.1 → 127.0.0.1    TLSv1.3 213 Application Data
+28   0.014232    127.0.0.1 → 127.0.0.1    TLSv1.3 311 Application Data
+29   0.014252    127.0.0.1 → 127.0.0.1    TLSv1.3 311 Application Data
+32   0.014311    127.0.0.1 → 127.0.0.1    TLSv1.3 231 Application Data
+35   0.014350    127.0.0.1 → 127.0.0.1    TLSv1.3 578 Application Data
+61   0.014746    127.0.0.1 → 127.0.0.1    TLSv1.3 215 Application Data
+64   0.014832    127.0.0.1 → 127.0.0.1    TLSv1.3 301 Application Data
+68   0.014867    127.0.0.1 → 127.0.0.1    TLSv1.3 233 Application Data
+81   0.015020    127.0.0.1 → 127.0.0.1    TLSv1.3 240 Application Data
+$ tshark -r captura_5050_5051.pcap -Y 'frame.number==29' -T fields -e tls.app_data
+9f1289b3fb1624e778818e357f4b0c106df2453d7c2330723ebdd674185a846fa491e517b9aa7ed9e54cb8ba11ea45b2

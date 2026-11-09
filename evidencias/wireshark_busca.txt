@@ -1,0 +1,5 @@
+pacotes da porta 5050 contendo 'teste wireshark 123': 4
+pacotes da porta 5051 contendo 'teste wireshark 123': 0
+pacotes da porta 5051 contendo 'teste wireshark 456': 0
+pacotes da porta 5050 contendo 'teste wireshark 456': 4
+versão TLS negociada (Server Hello): 0x0304

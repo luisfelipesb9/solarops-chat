@@ -45,7 +45,9 @@ def main() -> int:
     latency = time.monotonic() - started
     if not (resp.output_text or "").strip():
         return fail("a LLM respondeu sem texto (aumente LLM_MAX_OUTPUT_TOKENS ou reduza o raciocínio)")
-    print(f"OK chamada real: modelo={model} latência={latency:.2f}s usage={getattr(resp, 'usage', None)}")
+    usage = getattr(resp, "usage", None)
+    tokens = f"entrada={usage.input_tokens} saída={usage.output_tokens}" if usage else "indisponível"
+    print(f"OK chamada real: modelo={model} latência={latency:.2f}s tokens: {tokens}")
 
     # 3. an impossible timeout must surface as LLMTimeout
     try:

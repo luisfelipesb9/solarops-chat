@@ -1,0 +1,5 @@
+$ tshark -r captura_5050_5051.pcap -q -z follow,tcp,ascii,0 | grep wireshark
+Node 0: 127.0.0.1:56764
+Node 1: 127.0.0.1:5050
+{"type": "MSG", "from": "ana_cos", "to": "*", "content": "teste wireshark 123 (texto claro)", "req_id": "", "ts": "2026-11-09T04:16:10.119+00:00", "role": ""}
+{"type": "MSG", "from": "rui_tec", "to": "*", "content": "teste wireshark 456 (cifrado)", "req_id": "", "ts": "2026-11-09T04:16:10.119+00:00", "role": "tecnico"}

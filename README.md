@@ -18,6 +18,7 @@ Trabalho prático de Sistemas Distribuídos II (Unimontes). O contrato técnico 
 - Tkinter para a interface do servidor: `brew install python-tk@3.14` no macOS.
 - `openssl` no PATH (para gerar os certificados).
 - Uma chave da OpenAI para o bot real. Sem chave, use `make bot-fake`.
+- As portas padrão são 5050 (texto claro) e 5051 (TLS). A porta 5000 não é usada porque o macOS a reserva para o receptor AirPlay.
 
 ## Passo a passo
 
@@ -108,6 +109,18 @@ Uma mensagem JSON UTF-8 por linha, terminada em `\n`, com no máximo 65536 bytes
 ## Variáveis de ambiente
 
 Todas estão documentadas em `.env.example` (modelo, timeouts, tamanho do histórico, provedor `openai` ou `fake` e caminhos TLS). A chave da OpenAI fica só no `.env`, que está no `.gitignore`.
+
+## Evidências e relatório
+
+| Comando | O que faz |
+|---|---|
+| `make demo` | Roda `scripts/demo_evidencias.py` contra o servidor e o bot já em execução: chat durante a consulta, continuação, contextos separados e mensagens conhecidas para o Wireshark |
+| `sudo tcpdump -i lo0 -w evidencias/captura_5050_5051.pcap 'tcp port 5050 or tcp port 5051'` | Captura o loopback durante o `make demo` (Ctrl+C para parar) |
+| `make evidencias` | Extrai do pcap, com `tshark`, o fluxo em claro, os pacotes TLS e a busca pelas mensagens conhecidas |
+| `make relatorio` | Gera `docs/Trabalho Prático - SD2.docx` e o PDF a partir de `evidencias/` (requer Node.js e LibreOffice) |
+| `make entrega` | Empacota o código versionado em `entrega/SolarOps_SD2_codigo.zip`, sem `.env` e sem chaves privadas |
+
+O roteiro do vídeo está em `docs/roteiro_video.md`.
 
 ## Testes
 
