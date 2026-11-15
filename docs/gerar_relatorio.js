@@ -242,6 +242,7 @@ add(Terminal("check_llm.py: validação da chave, do modelo e do tempo limite", 
 add(P("O script confirma que o modelo existe na conta, faz uma chamada real (1,4 s, 22 tokens de entrada) e força um tempo limite de 0,001 s para provar que ele é convertido em LLMTimeout."));
 
 add(H2("8. Testes e evidências"));
+add(P("Gravação da demonstração (cenários de avaliação e principais decisões de implementação): https://youtu.be/aK6Zz9pUF8c"));
 add(P("A suíte automatizada usa sockets reais em portas efêmeras e uma LLM simulada (FakeLLM), sem acesso à internet. Os testes ponta a ponta sobem servidor, bot e clientes como processos separados, com um humano e o bot em TLS."));
 add(T([
   ["Arquivo", "Testes", "Cobertura"],
