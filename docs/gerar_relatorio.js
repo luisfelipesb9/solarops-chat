@@ -119,12 +119,12 @@ const cover = [
   C("CURSO DE BACHARELADO EM SISTEMAS DE INFORMAÇÃO"),
   C("Trabalho Prático: SolarOps Chat", {}, { spacing: { before: 3400 } }),
   C("Chat Cliente-Servidor com Sockets, Threads, Criptografia e Bot LLM"),
-  C("Alisson Silveira Cardoso", { bold: false }, { spacing: { before: 1200 } }),
+  C("Alisson Silveira Cardoso", { bold: false }, { spacing: { before: 900 } }),
   C("André Felipe Souto Araújo", { bold: false }),
   C("Luís Felipe Silva Barbosa", { bold: false }),
-  new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { before: 2600, line: 360, after: 0 }, children: [run("Disciplina: Sistemas Distribuídos II", { bold: true })] }),
+  new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { before: 1800, line: 360, after: 0 }, children: [run("Disciplina: Sistemas Distribuídos II", { bold: true })] }),
   new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { line: 360, after: 0 }, children: [run("Prof. Marcel Veloso Campos", { bold: true })] }),
-  C("MONTES CLAROS - MG", {}, { spacing: { before: 2600 } }),
+  C("MONTES CLAROS - MG", {}, { spacing: { before: 2000 } }),
   C("2026/2"),
 ];
 
